@@ -1,3 +1,1 @@
-﻿加油，兄弟们！！！
-
-cuirongjie branch
+加油，兄弟们！！
