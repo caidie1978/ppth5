@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="background" tilewidth="32" tileheight="32">
+  <image source="background.jpg" width="512" height="362"/>
+ </tileset>
+ <tileset firstgid="177" name="star" tilewidth="32" tileheight="32">
+  <image source="star.png" width="60" height="71"/>
+ </tileset>
+ <tileset firstgid="179" name="PurpleMonster" tilewidth="32" tileheight="32">
+  <image source="PurpleMonster.png" width="78" height="67"/>
+ </tileset>
+ <layer name="groud" width="20" height="20" opacity="0.9">
+  <data encoding="base64" compression="zlib">
+   eJztzFc3EGAAgGFKS1qUkdHWUNKkKBntnYYW2oOGFpWKpjZaKqIpFP1Ezw/4Ltx2jvec5/aNiPg/imQYw4liBCMZxWjGEM1YYhjHeCYwMfCbRCxxTGYK8SSQSBJTSSaFVNKYxvTAbwYzmcVs5pDOXOYxnwVksJBFZLKYrMBvCUtZxnJWsJJscljFanLJYw1ryWdd4FdAIUUUs54NbGQTm9nCVraxnR3sZFfgt5s9lLCXfeznAKUc5BCHOcJRyiinIvA7xnFOcJJTnOYMZznHeSqp4gIXucTlwK+aK1zlGte5QQ213OQWt6njDne5R33g18B9HvCQRzzmCY085RnPecFLXvGapsCvmRbe8JZ3vOcDrXzkE59po50vdNAZ+H3lG9/5wU9+0cVvuumhlz/8pY9+/gV+Qw01mAYAnSU82Q==
+  </data>
+ </layer>
+ <layer name="barriers" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYKA+4KQSRjaPGm4aSPNI8SM289DFCKmhxDxOPGKkmIduDiXmYTOHGu7D5k5y3YdPDTHmkZsnaJGeqZl/R8HwBQAauwNz
+  </data>
+ </layer>
+ <layer name="item" width="20" height="20">
+  <properties>
+   <property name="isItem" value="1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQxVsGmgH0AGMBD+OglEwVAEAr5MBZQ==
+  </data>
+ </layer>
+ <objectgroup name="role">
+  <object name="end" gid="182" x="128" y="257">
+   <properties>
+    <property name="Type" value="1"/>
+   </properties>
+  </object>
+  <object name="start" gid="182" x="546" y="97">
+   <properties>
+    <property name="Type" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
