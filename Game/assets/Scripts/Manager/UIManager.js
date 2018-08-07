@@ -5,7 +5,7 @@
 
  var Map = require("Map");
 
-var UIManager = cc.Class({
+cc.Class({
     extends: cc.Component,
 
     //name:"UIManager",
@@ -34,6 +34,9 @@ var UIManager = cc.Class({
         cc.log("UIManager 管理器添加成功");
         cc.game.addPersistRootNode(this.node);
         this.AllUIObj = new Map();
+
+        this.uiroot = cc.find("Canvas", cc.node);
+        cc.game.addPersistRootNode(this.uiroot);
     },
 
     start:function(){
@@ -85,7 +88,10 @@ var UIManager = cc.Class({
         if (isExist)
         {
             var uiObj = this.AllUIObj.get(uiName);
+            
             uiObj.active = false;
+
+            uiObj.destroy();
         }
     },
 
@@ -94,12 +100,11 @@ var UIManager = cc.Class({
         var isExist = this.AllUIObj.contains(uiName);
         if (isExist)
         {
-            this.AllUIObj.remove(uiName);
+            this.AllUIObj.remove(uiName);   
         }
     },
 
     setRoot:function(){
-        this.uiroot = cc.find("Canvas", cc.node);
     },
 
     // update (dt) {},

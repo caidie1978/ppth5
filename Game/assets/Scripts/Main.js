@@ -1,7 +1,7 @@
 
-var eventDispatch = require("eventDispatch");
-var EventID = require("EventID");
-var Facade = require("Facade");
+const eventDispatch = require("eventDispatch");
+const EventID = require("EventID");
+const Facade = require("Facade");
 // 先由这里来启动游戏，加载表格数据之类的，在启动游戏大厅
 
 cc.Class({
@@ -15,13 +15,14 @@ cc.Class({
 
     onLoad () {
         cc.game.addPersistRootNode(this.node);
-
-        Facade.init();
+    
+        Facade.instance.init();
     },
 
     start () {
+        
         cc.log("场景启动，发送消息");
-        eventDispatch.send(EventID.GameInit);
+        eventDispatch.instance.send(EventID.GameInit);
     },
 
     // update (dt) {},

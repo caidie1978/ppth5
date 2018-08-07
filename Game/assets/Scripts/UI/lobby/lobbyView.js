@@ -10,6 +10,7 @@
 
 var IView = require("IView");
 var EventID = require("EventID");
+var Facade = require("Facade");
 
 cc.Class({
     extends: IView,
@@ -44,6 +45,8 @@ cc.Class({
             cc.log("点击随机匹配");
             // TODO 发送事件到controller,这里不做处理
             self.send(EventID.StartRandomBattle);
+
+            Facade.instance.uiMgr.close(self.node.name);
         });
 
         // 组队匹配

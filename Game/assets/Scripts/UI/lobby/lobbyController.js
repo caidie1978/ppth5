@@ -28,17 +28,17 @@ var lobbyController = cc.Class({
 
     register:function()
     {
-        eventDispatch.register(EventID.LobbySceneInit, this.Oninit);
+        eventDispatch.instance.register(EventID.LobbySceneInit, this.Oninit);
     },
 
     Oninit:function(obj, param)
     {
+        var Facade = require("Facade");
         // 加载UI
-
         var info = UIConfig.lobbyUI;
 
         cc.log("配置文件 = "+info);
-        Facade.uiMgr.open(info.Path);
+        Facade.instance.uiMgr.open(info.Path);
     }
 });
 

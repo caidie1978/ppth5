@@ -8,51 +8,83 @@ var sceneController = require("sceneController");
 var lobbyController = require("lobbyController");
 var Map = require("Map");
 
-export var Facade = (function(){
-     var unique;
-     unique = new _Facade();
+var Facade = cc.Class({
 
-     return unique;
- })();
+    statics:{
+        instance:null
+    },
 
-function _Facade(){
-    cc.log("Facade init.");
-}
+    properties:{
+        modelMap:
+        {
+            serializable:false,
+            default:null,
+            type:Map
+        },
 
-Facade._directorMediator = null;
+        uiMgr:{
+            serializable:false,
+            default:null,
+            type:cc.Node
+        },
+        resMgr:{
+            serializable:false,
+            default:null,
+            type:cc.Node
+        },
+        
+        poolMgr:{
+            serializable:false,
+            default:null,
+            type:cc.Node
+        },
+        
+        tabMgr:{
+            serializable:false,
+            default:null,
+            type:cc.Node
+        }
+    },
 
-Facade._modelMap = null;
-
-// 管理器
-Facade.uiMgr = null;
-Facade.resMgr = null;
-Facade.poolMgr = null;
-
-/**
- * Init Framework
- */
-Facade.init = function(){
-    // 初始化消息订阅
-    eventDispatch.init();
-    Facade._modelMap = new Map();
-    // 注册下游戏模块
-    Facade.registerModel("sceneController", new sceneController());
-    Facade.registerModel("lobbyController", new lobbyController());
-    //var scenectl = new sceneController();
-    //scenectl.init();
+    registerModel:function(cls, model){
+        model.init();
+        var isExist = this.modelMap.contains(cls);
+        if (isExist){
+            cc.log("Model:" + cls + "have already exists1");
+        }else{
+            this.modelMap.put(cls, model);
+        }
+    },
     
-    //var lobbyctl = new lobbyController();
-    //lobbyctl.init();
-}
+    getController:function(cls){
+        var isExist = this.modelMap.contains(cls);
+        if (isExist){
+            return this.modelMap.get(cls);
+        }else{
+            return null;
+        }
+    },
 
-Facade.registerModel = function(cls, model){
-    model.init();
-    var isExist = Facade._modelMap.contains(cls);
-    if (isExist){
-        cc.log("Model:" + cls + "have already exists1");
-    }else{
-        Facade._modelMap.put(cls, model);
-    }
-}
+    init:function(){
+        // 初始化消息订阅
+        eventDispatch.instance.init();
+        this.modelMap = new Map();
+        // 注册下游戏模块
+        this.registerModel("sceneController", new sceneController());
+        this.registerModel("lobbyController", new lobbyController());
+
+        
+        var rootManager = cc.find("Manager");
+
+        this.resMgr = rootManager.getComponent("resManager");
+        this.uiMgr = rootManager.getComponent("UIManager");
+        this.tabMgr = rootManager.getComponent("TableManager");
+        this.poolMgr = rootManager.getComponent("PoolManager");
+        
+    },
+    
+});
+
+Facade.instance = new Facade();
 
 module.exports = Facade;

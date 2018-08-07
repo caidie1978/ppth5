@@ -3,8 +3,7 @@
 IController 
 @author wy
  *************************************************************/
-import { Facade } from "../Facade";
-
+var Facade = require("Facade");
 var eventDispatch = require("eventDispatch");
 
 var IController = cc.Class({

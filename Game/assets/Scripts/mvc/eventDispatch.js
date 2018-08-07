@@ -5,83 +5,82 @@
 
  var Map = require("Map");
 
-var eventDispatch = (function(){
-    var unique;
-    unique = new _eventDispatch();
+ var eventDispatch = cc.Class({
 
-    return unique;
- })();
+        statics:{
+            instance:null
+        },
 
+        properties:{
+            callbackList:{ 
+                serializable:false,
+                default:null,
+                type:Map
+            }
+        },
 
- function _eventDispatch(){
-     cc.log("eventDispatch init.");
- }
+        init:function(){
+            this.callbackList = new Map();
+        },
 
-
- eventDispatch.callbackList = null;
-
-/**
- * 使用之前先调用下Init
- */
-eventDispatch.init = function(){
-    eventDispatch.callbackList = new Map();
-}
-
-/**
- * 订阅消息
- */
-eventDispatch.register = function(type, callback, targerobj){
-    var isExist = eventDispatch.callbackList.contains(type);
-    if (isExist){
-        var arr = eventDispatch.callbackList.get(type);
-        arr.push([callback, targerobj]);
-    }else{
-        var arr = new Array();
-        arr.push([callback, targerobj]);
-        eventDispatch.callbackList.put(type, arr);
-    }
-}
+        
+        /**
+         * 订阅消息
+         */
+        register:function(type, callback, targerobj){
+            var isExist = this.callbackList.contains(type);
+            if (isExist){
+                var arr = this.callbackList.get(type);
+                arr.push([callback, targerobj]);
+            }else{
+                var arr = new Array();
+                arr.push([callback, targerobj]);
+                this.callbackList.put(type, arr);
+            }
+        },
 
 
-eventDispatch.unregister = function(type){
-    var isExist = eventDispatch.callbackList.contains(type);
-	if (isExist) {
-		var arr = eventDispatch.callbackList.get(type);
-		for (var i = 0; i < arr.length; i++) {
-			if (arr[i][0] == callback) {
-				arr.splice(i, 1);
-				return true;
-			}
-		}
-		return false;
-	} 
-	return false;
-}
+        unregister:function(type){
+            var isExist = this.callbackList.contains(type);
+            if (isExist) {
+                var arr = this.callbackList.get(type);
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i][0] == callback) {
+                        arr.splice(i, 1);
+                        return true;
+                    }
+                }
+                return false;
+            } 
+            return false;
+        },
 
-eventDispatch.removeByType = function(type){
-    var isExist = eventDispatch.callbackList.contains(type);
-	if (isExist) {
-		return eventDispatch.callbackList.remove(type);
-	} 
-	return false;
-}
+        removeByType:function(type){
+            var isExist = this.callbackList.contains(type);
+            if (isExist) {
+                return this.callbackList.remove(type);
+            } 
+            return false;
+        },
 
-eventDispatch.removeAll = function(){
-    eventDispatch.callbackList.clear();
-}
+        removeAll:function(){
+            this.callbackList.clear();
+        },
 
- // send Message
- eventDispatch.send = function(type, obj){
-     var isExist = eventDispatch.callbackList.contains(type);
-     if (isExist){
-        // cc.log("发送事件处理");
-        var arr = eventDispatch.callbackList.get(type);
-		for (var i = 0; i < arr.length; i++) {
-			if (arr[i] != undefined && arr[i] != null) {
-				arr[i][0](obj, arr[i][1]);
-			}
-		}
-     }
- }
+        // send Message
+        send:function(type, obj){
+            var isExist = this.callbackList.contains(type);
+            if (isExist){
+                // cc.log("发送事件处理");
+                var arr = this.callbackList.get(type);
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i] != undefined && arr[i] != null) {
+                        arr[i][0](obj, arr[i][1]);
+                    }
+                }
+            }
+        }
+ });
 
+eventDispatch.instance = new eventDispatch();
 module.exports = eventDispatch;

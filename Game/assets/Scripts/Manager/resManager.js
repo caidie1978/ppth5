@@ -10,11 +10,22 @@
 
 var resManager = cc.Class({
     extends: cc.Component,
+    
+    editor: {
+        executionOrder: -1
+    },
 
-    // onLoad () {},
-
-    start () {
+    statics:
+    {
+        instance:null
+    },
+    onLoad:function () {
+        resManager.instance = this;
         cc.log("resManager 添加成功");
+    },
+
+    start:function () {
+        
     },
 
     // 加载资源
@@ -36,9 +47,12 @@ var resManager = cc.Class({
         cc.director.loadScene(sceneName, function(){
             callback();
         });
+    },
+
+    logerr:function()
+    {
+        cc.log("========测试log=============================");
     }
-
-
 });
 
-//module.exports = resManager;
+module.exports = resManager;
