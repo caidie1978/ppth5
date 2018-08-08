@@ -33,7 +33,7 @@ var IController = cc.Class({
     },
 
     send:function(key, obj){
-        eventDispatch.send(key, obj);
+        eventDispatch.instance.send(key, obj);
     },
 
     // 获取Model

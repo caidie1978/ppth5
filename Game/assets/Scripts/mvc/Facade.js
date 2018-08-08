@@ -6,6 +6,7 @@
 var eventDispatch = require("eventDispatch");
 var sceneController = require("sceneController");
 var lobbyController = require("lobbyController");
+var confirmController = require("confirmController");
 var Map = require("Map");
 
 var Facade = cc.Class({
@@ -43,7 +44,9 @@ var Facade = cc.Class({
             serializable:false,
             default:null,
             type:cc.Node
-        }
+        },
+
+        mvsMgr: null,
     },
 
     registerModel:function(cls, model){
@@ -72,7 +75,7 @@ var Facade = cc.Class({
         // 注册下游戏模块
         this.registerModel("sceneController", new sceneController());
         this.registerModel("lobbyController", new lobbyController());
-
+        this.registerModel("confirmController", new confirmController());
         
         var rootManager = cc.find("Manager");
 
@@ -80,6 +83,7 @@ var Facade = cc.Class({
         this.uiMgr = rootManager.getComponent("UIManager");
         this.tabMgr = rootManager.getComponent("TableManager");
         this.poolMgr = rootManager.getComponent("PoolManager");
+        this.mvsMgr = require("../MatchVS/MatchVSMgr").mvsMgr;
         
     },
     

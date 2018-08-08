@@ -5,7 +5,11 @@
             "Path":"UIPrefab/lobbyUI/lobbyUI",
             "Group":1
     },
-
+    "confirmUI":
+    {
+            "Path":"UIPrefab/confirm/confirmUI",
+            "Group":1
+    },
 }
 
 module.exports = UIConfig;
