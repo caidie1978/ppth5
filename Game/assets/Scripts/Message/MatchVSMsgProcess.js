@@ -1,3 +1,6 @@
+var gd = require("GlobalData");
+var eventDispatch = require("eventDispatch");
+var defstruct = require("DefStruct");
 /**
  * 消息处理
  */
@@ -5,15 +8,24 @@ function MatchVSMsgProcess() {
 
 
     /**
-     *
+     * 主动创建房间回调
      * @param rsp {MsCreateRoomRsp}
      */
     this.createRoomResponse = function (rsp) {
-
+        var status = rsp.status;
+        if (status !== 200) {
+            eventDispatch.send(EventID.OpenConfirm, {
+                showType : defstruct.ConfirmUIType.OnlyConfirm,
+                textvalue : '创建房间失败: ' + status,
+            });
+        } else {
+            gd.mvsRoomMasterID = rsp.owner;
+            gd.mvsRoomID = rsp.roomID;
+        }
     };
 
     /**
-     *
+     * 加入房间通知，可能是随机匹配调用过来的，也有可能是创建房间调用过来的
      * @param status
      * @param roomUserInfoList
      * @param roomInfo
@@ -21,10 +33,13 @@ function MatchVSMsgProcess() {
     this.joinRoomResponse = function (status, roomUserInfoList, roomInfo) {
         if (status !== 200) {
             return this.labelLog('进入房间失败,异步回调错误码: ' + status);
+            eventDispatch.send(EventID.OpenConfirm, {
+                showType : defstruct.ConfirmUIType.OnlyConfirm,
+                textvalue : '进入房间失败: ' + status,
+            });
         } else {
-            this.labelLog('进入房间成功');
-            this.labelLog('房间号: ' + roomInfo.roomID);
-            mvs.engine.getRoomDetail(roomInfo.roomID)
+            gd.mvsRoomMasterID = roomInfo.owner;
+            gd.mvsRoomID = roomInfo.roomID;
         }
         this.labelRoomID.string = roomInfo.roomID;
         GLB.roomId = roomInfo.roomID;

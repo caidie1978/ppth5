@@ -9,6 +9,7 @@ var EventID = require("EventID");
 var Facade = require("Facade");
 var lobbyModel = require("lobbyModel");
 var defstruct = require("DefStruct");
+var gd = require("GlobalData");
 
 var lobbyController = cc.Class({
     extends:IController,
@@ -90,7 +91,7 @@ var lobbyController = cc.Class({
                 self.send(EventID.OnConfirmClkCancel);
             }, 500);
 
-            //cc.log("MyUserID = " + Facade.mvsMgr.getMyUserID());
+            gd.mvsUserID = Facade.mvsMgr.getMyUserID();
         }
     },
 
