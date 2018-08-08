@@ -9,6 +9,13 @@ var EventID = {
     StartRandomBattle:"StartRandomBattle",
     StartTeamBattle:"StartTeamBattle",
     ReturToLobby:"ReturToLobby",
+
+    OpenConfrim:"OpenConfirm",
+    OnConfirmClkOk:"OnConfirmClkOk",
+    OnConfirmClkCancel:"OnConfirmClkCancel",
+
+    OnSignRandomBattle:"OnSignRandomBattle",
+    OnSignTeamBattle:"OnSignTeamBattle",
 }
 
 module.exports = EventID;

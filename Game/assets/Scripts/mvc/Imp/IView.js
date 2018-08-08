@@ -16,7 +16,7 @@ var IView = cc.Class({
     // 当UI被销毁的时候调用
     onDestroy:function(){
         cc.log("获取预设名称" + name);
-        Facade.uiMgr.remove(name);
+        //Facade.uiMgr.remove(name);
     },
 
  });

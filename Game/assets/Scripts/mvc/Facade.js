@@ -6,6 +6,7 @@
 var eventDispatch = require("eventDispatch");
 var sceneController = require("sceneController");
 var lobbyController = require("lobbyController");
+var confirmController = require("confirmController");
 var Map = require("Map");
 
 export var Facade = (function(){
@@ -27,6 +28,7 @@ Facade._modelMap = null;
 Facade.uiMgr = null;
 Facade.resMgr = null;
 Facade.poolMgr = null;
+Facade.mvsMgr = null;
 
 /**
  * Init Framework
@@ -38,6 +40,7 @@ Facade.init = function(){
     // 注册下游戏模块
     Facade.registerModel("sceneController", new sceneController());
     Facade.registerModel("lobbyController", new lobbyController());
+    Facade.registerModel("confirmController", new confirmController());
     //var scenectl = new sceneController();
     //scenectl.init();
     

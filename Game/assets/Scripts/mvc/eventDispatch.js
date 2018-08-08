@@ -43,7 +43,7 @@ eventDispatch.register = function(type, callback, targerobj){
 }
 
 
-eventDispatch.unregister = function(type){
+eventDispatch.unregister = function(type, callback){
     var isExist = eventDispatch.callbackList.contains(type);
 	if (isExist) {
 		var arr = eventDispatch.callbackList.get(type);

@@ -32,6 +32,8 @@ var sceneController = cc.Class({
         Facade.uiMgr = callbackObj.rootManager.getComponent("UIManager");
         Facade.tabMgr = callbackObj.rootManager.getComponent("TableManager");
         Facade.poolMgr = callbackObj.rootManager.getComponent("PoolManager");
+
+        Facade.mvsMgr = require("../MatchVS/MatchVSMgr").mvsMgr;
         
         cc.log("初始化，开始调用场景加载");
 

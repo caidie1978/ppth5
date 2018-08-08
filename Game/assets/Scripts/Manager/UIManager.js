@@ -40,7 +40,7 @@ var UIManager = cc.Class({
         
     },
 
-    open:function(uiName){
+    open:function(uiName, fcallback = null){
         // 加载UI资源
         var index = uiName.lastIndexOf('/');
         var tempName = uiName.substr(index+1);
@@ -53,6 +53,10 @@ var UIManager = cc.Class({
         {
             var uiObj = this.AllUIObj.get(tempName);
             uiObj.active = true;
+
+            if (fcallback != null){
+                fcallback(uiObj);
+            }
         }
         else
         {
@@ -73,6 +77,10 @@ var UIManager = cc.Class({
                 cc.log("缓存到容器中="+uiObj.name);
                 // 添加到缓存中
                 self.AllUIObj.put(uiObj.name, uiObj);
+
+                if (fcallback != null){
+                    fcallback(uiObj);
+                }
             });
         }
 
@@ -103,6 +111,9 @@ var UIManager = cc.Class({
     },
 
     // update (dt) {},
+    clear : function(){
+        this.AllUIObj.clear();
+    }
 });
 
 //module.exports = UIManager;
