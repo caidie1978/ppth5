@@ -5,3 +5,6 @@
 
 * MatchVS的sdk需要自己从CocosCreate中的扩展商店中下载安装
 * Game目录下的packages文件夹添加到.gitignore中，需要在packages目录中添加文件的需要注意了
+
+上述问题的另外一种解决方法：
+MatchVS插件以全局方式安装，可避免污染项目目录，不用忽略git提交，但其它项目也会有插件资源目录不过在不开发其它项目的前提下不要紧
