@@ -15,7 +15,7 @@ var IController = cc.Class({
     // 初始化
     init:function(){
         this.register();
-        cc.log("Sub Class is Init");
+        //cc.log("Sub Class is Init");
     },
     // 注册一个事件监听
     register:function(){
@@ -38,7 +38,7 @@ var IController = cc.Class({
 
     // 获取Model
     getModel:function(cls){
-        return Facade._modelMap.get(cls);
+        return Facade.instance._modelMap.get(cls);
     }
  });
 

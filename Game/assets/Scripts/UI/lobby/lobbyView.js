@@ -44,8 +44,8 @@ cc.Class({
         this.quickBattleBtn.on(cc.Node.EventType.TOUCH_END, function(event){
             cc.log("点击随机匹配");
             // TODO 发送事件到controller,这里不做处理
-            self.send(EventID.StartRandomBattle);
-
+           // self.send(EventID.QuickJoinBattle);
+           self.send(EventID.StartRandomBattle);
             Facade.instance.uiMgr.close(self.node.name);
         });
 
