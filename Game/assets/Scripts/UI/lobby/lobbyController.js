@@ -34,16 +34,17 @@ var lobbyController = cc.Class({
 
         eventDispatch.instance.register(EventID.LobbySceneInit, this.Oninit.bind(this));
         eventDispatch.instance.register(EventID.OnSignRandomBattle, this.OnSignRandomBattle);
+        eventDispatch.instance.register(EventID.QuickJoinBattle, this.QuickJoinBattle, this);
     },
 
-    Oninit:function(obj, param)
+    Oninit:function(obj, callbackObj)
     {
         var Facade = require("Facade");
         // 加载UI
         var info = UIConfig.lobbyUI;
 
         cc.log("配置文件 = "+info);
-        Facade.instance.uiMgr.open(info.Path);
+        //Facade.instance.uiMgr.open(info.Path);
         Facade.instance.uiMgr.open(info.Path, ((obj)=>{
             // 这里初始化MatchVS，以便失败后提示UI能正常显示
             this.initMatchVS();
@@ -106,6 +107,15 @@ var lobbyController = cc.Class({
         var signData = defstruct.create
         // 单人报名
         Facade.instance.mvsMgr.joinSingleBattleRoom();
+    },
+
+    QuickJoinBattle:function(obj, callbackObj)
+    {
+        var Facade = require("Facade");
+
+        var userProfile = defStruct.createMVSUserProfile(MVS_UserInfo.mvsUserID);
+
+        Facade.instance.mvsMgr.joinSingleBattleRoom(userProfile);
     }
 });
 

@@ -52,6 +52,7 @@ cc.Class({
 
         // 如果UI缓存已经存在了，就直接显示UI，否在再去加载UI
         var isExist = this.AllUIObj.contains(tempName);
+        cc.log("==========isExist" + isExist);
         if (isExist)
         {
             var uiObj = this.AllUIObj.get(tempName);
@@ -68,15 +69,14 @@ cc.Class({
 
                 if (err)
                 {
-                    cc.error("Load UI Error info = ".err);
+                    cc.log("Load UI Error info = "+err);
                     return;
                 }
                 var uiObj = cc.instantiate(prefab);
+                uiObj.active = true;
                 // 设置UI节点
-                var parent = cc.find("Canvas", cc.node);
-        
                 self.uiroot.addChild(uiObj);
-        
+
                 cc.log("缓存到容器中="+uiObj.name);
                 // 添加到缓存中
                 self.AllUIObj.put(uiObj.name, uiObj);

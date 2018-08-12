@@ -40,8 +40,11 @@ var sceneController = cc.Class({
         // 可以随机一个场景， 加载场景开始战斗，加载战斗ui
         Facade.instance.resMgr.loadScene("Scenes/battle", function(){
             // 发送指令,lobbyconrtroller加载UI
-            //eventDispatch.send(EventID.LobbySceneInit);
+            eventDispatch.instance.send(EventID.BattleSceneInit);
+           
+           //var controll = Facade.instance.getController("battleController");
 
+           //controll.Oninit();
         });
     },
 
@@ -50,7 +53,7 @@ var sceneController = cc.Class({
         var Facade = require("Facade");
         Facade.instance.resMgr.loadScene("Scenes/battle", function(){
             // 发送指令,lobbyconrtroller加载UI
-            eventDispatch.send(EventID.LobbySceneInit);
+            eventDispatch.instance.send(EventID.BattleSceneInit);
 
         });
     },
@@ -62,11 +65,11 @@ var sceneController = cc.Class({
         //Facade.resMgr.loadScene(
         Facade.instance.resMgr.loadScene("Scenes/lobby", function(){
             // 发送指令,lobbyconrtroller加载UI
-            //eventDispatch.send(EventID.LobbySceneInit);
+            eventDispatch.instance.send(EventID.LobbySceneInit);
 
-            var controll = Facade.instance.getController("lobbyController");
+            //var controll = Facade.instance.getController("lobbyController");
 
-            controll.Oninit();
+            //controll.Oninit();
         });
     }
 

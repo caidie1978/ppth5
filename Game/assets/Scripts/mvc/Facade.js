@@ -6,6 +6,7 @@
 var eventDispatch = require("eventDispatch");
 var sceneController = require("sceneController");
 var lobbyController = require("lobbyController");
+var battleController = require("battleController");
 var confirmController = require("confirmController");
 var Map = require("Map");
 
@@ -76,6 +77,7 @@ var Facade = cc.Class({
         this.registerModel("sceneController", new sceneController());
         this.registerModel("lobbyController", new lobbyController());
         this.registerModel("confirmController", new confirmController());
+        this.registerModel("battleController", new battleController());
         
         var rootManager = cc.find("Manager");
 
